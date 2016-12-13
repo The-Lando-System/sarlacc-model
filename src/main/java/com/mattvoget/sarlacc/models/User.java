@@ -16,6 +16,7 @@ public class User implements UserDetails {
 	private String lastName;
 	private String email;
 	private Role role;
+	private Token token;
 
 	public String getId() {
 		return id;
@@ -27,6 +28,10 @@ public class User implements UserDetails {
 
 	public String getUsername() {
 		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -69,6 +74,14 @@ public class User implements UserDetails {
 		this.role = role;
 	}
 
+	public Token getToken() {
+		return token;
+	}
+
+	public void setToken(Token token) {
+		this.token = token;
+	}
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -87,10 +100,6 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	@Override
