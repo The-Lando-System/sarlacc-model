@@ -105,6 +105,10 @@ public class User implements UserDetails {
 		return true;
 	}
 
+	public void setAuthorities(Set<Role> roles){
+		this.roles = roles;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles;
