@@ -20,6 +20,7 @@ public class User implements UserDetails {
 	private String lastName;
 	private String email;
 	private Token token;
+	private Role role;
 	Set<Role> roles = new HashSet<>();
 
 	public String getId() {
@@ -112,11 +113,11 @@ public class User implements UserDetails {
 	}
 	
 	public Role getRole() {
-		return (Role) getAuthorities().toArray()[0];
+		return role;
 	}
 	
 	public void setRole(Role role) {
-		getAuthorities().toArray()[0] = role;
+		this.role = role;
 	}
 
 	@Override
