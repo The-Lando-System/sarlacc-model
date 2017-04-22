@@ -1,13 +1,13 @@
 package com.mattvoget.sarlacc.models;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class User implements UserDetails {
 	
@@ -104,7 +104,19 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (roles == null){
+			roles = new HashSet<Role>();
+		}
+		
 		return roles;
+	}
+	
+	public Role getRole() {
+		return (Role) getAuthorities().toArray()[0];
+	}
+	
+	public void setRole(Role role) {
+		getAuthorities().toArray()[0] = role;
 	}
 
 	@Override
