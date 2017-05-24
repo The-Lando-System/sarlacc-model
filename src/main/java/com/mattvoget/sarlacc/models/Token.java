@@ -2,10 +2,17 @@ package com.mattvoget.sarlacc.models;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Token {
+public class Token implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
     private String accessToken;
     private String expiresIn;
@@ -58,8 +65,19 @@ public class Token {
         this.tokenType = tokenType;
     }
 
-    @Override
-    public String toString(){
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
+	@Override
+	public String toString(){
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
 }

@@ -1,9 +1,10 @@
 package com.mattvoget.sarlacc.models;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,9 +21,8 @@ public class User implements UserDetails {
 	private String lastName;
 	private String email;
 	private Token token;
-	private Role role;
-	Set<Role> roles = new HashSet<>();
-
+	private List<AppRole> appRoles;
+	
 	public String getId() {
 		return id;
 	}
@@ -78,6 +78,14 @@ public class User implements UserDetails {
 	public void setToken(Token token) {
 		this.token = token;
 	}
+	
+	public List<AppRole> getAppRoles() {
+		return appRoles;
+	}
+
+	public void setAppRoles(List<AppRole> appRoles) {
+		this.appRoles = appRoles;
+	}
 
 	@Override
 	public boolean isAccountNonExpired() {
@@ -99,29 +107,24 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public void setAuthorities(Set<Role> roles){
-		this.roles = roles;
-	}
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (roles == null){
-			roles = new HashSet<Role>();
-		}
-		
-		return roles;
+		return null;
 	}
 	
-	public Role getRole() {
-		return role;
-	}
-	
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
 	@Override
 	public String toString(){
 		return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
 }
