@@ -114,7 +114,7 @@ public class User implements UserDetails {
 	
 	@Override
 	public String toString(){
-		return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 	
 	@Override
